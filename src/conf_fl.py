@@ -20,8 +20,12 @@ DS = {
                  rare=["Backdoor", "Shellcode", "Analysis", "Worms"]),
     "ton": dict(common=["Benign", "ddos", "xss", "password", "scanning", "injection"],
                 rare=["ransomware", "mitm", "Backdoor", "dos"]),
+    # plan v3 Part F: classes chosen by rule from results/audit_cic2018_v3.md
+    "cic": dict(common=["Benign", "DDOS_attack-HOIC", "FTP-BruteForce", "DDoS_attacks-LOIC-HTTP", "Bot", "SSH-Bruteforce"],
+                rare=["SQL_Injection", "Brute_Force_-XSS", "Brute_Force_-Web", "DDOS_attack-LOIC-UDP"]),
 }
 TON_POOL = os.path.join(os.path.dirname(__file__), "..", "data", "nf_toniot_v3", "pool.parquet")
+CIC_POOL = os.path.join(os.path.dirname(__file__), "..", "data", "nf_cic2018_v3", "pool.parquet")
 ROUNDS, N_CAL, TON_COMMON_TRAIN = int(os.environ.get("SMOKE_ROUNDS", 60)), 20000, 20000
 
 
