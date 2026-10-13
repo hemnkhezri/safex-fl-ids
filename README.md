@@ -1,7 +1,7 @@
-# When only one client has seen the attack
+# SAFE-X: calibrated expert sharing for client-exclusive rare attacks
 
 Code, pre-registered study plans and results for the paper
-**"When only one client has seen the attack: client-exclusive rare attacks in federated intrusion detection"**
+**"SAFE-X: Calibrated expert sharing for detecting client-exclusive rare attacks in federated intrusion detection"**
 (submitted to *Computer Networks*).
 
 The paper studies federated intrusion detection when a rare attack is labelled at a single client with only
