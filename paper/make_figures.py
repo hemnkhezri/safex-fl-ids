@@ -25,7 +25,7 @@ def panel(ax, series, title):
         ax.errorbar(ks, mu, yerr=[[x[0] - x[1] for x in m], [x[2] - x[0] for x in m]], color=C[i], marker=MK[i], ms=4.5,
                     capsize=2, label=name, lw=1.4, elinewidth=0.9)
     ax.set_xscale("log"); ax.set_xticks(ks); ax.set_xticklabels(ks); ax.minorticks_off()
-    ax.set_xlabel("Labelled flows per rare class at its owner (k)"); ax.set_title(title, fontsize=8.5, loc="left")
+    ax.set_xlabel("Labeled flows per rare class at its owner (k)"); ax.set_title(title, fontsize=8.5, loc="left")
 
 # Fig 2: Study 1
 d = pd.read_csv(os.path.join(R, "study1", "conf_scores.csv")); d = d[(d.arm == "primary") & (d.alpha == 0.5)]
@@ -73,23 +73,5 @@ for ax, ds in zip(axs, ["unsw", "ton"]):
 h,l=axs[0].get_legend_handles_labels(); fig.legend(h,l,loc="lower center",ncol=3,fontsize=7)
 fig.tight_layout(rect=(0,0.14,1,1)); fig.savefig(OUT + "/fig4_safex.png", dpi=300); plt.close(fig)
 
-# Fig 1: overview of SAFE-X
-fig, ax = plt.subplots(figsize=(7.48, 3.0)); ax.set_xlim(0, 100); ax.set_ylim(0, 42); ax.axis("off")
-def box(x, y, w, h, t, fc="#eef4fc", ec="#2a78d6", fs=7):
-    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.4,rounding_size=1.2", fc=fc, ec=ec, lw=1))
-    ax.text(x + w / 2, y + h / 2, t, ha="center", va="center", fontsize=fs, color="#0b0b0b")
-def arr(x1, y1, x2, y2, t=None):
-    ax.annotate("", (x2, y2), (x1, y1), arrowprops=dict(arrowstyle="-|>", color="#52514e", lw=0.9))
-    if t: ax.text((x1 + x2) / 2, (y1 + y2) / 2 + 1.2, t, ha="center", fontsize=6, color="#52514e")
-box(1, 28, 20, 11, "Owner client j\nk labelled flows of\nrare class c", "#fdf0ea", "#eb6834")
-box(1, 3, 20, 11, "Clients 1..K\nbenign + common\nattack flows", "#eef4fc", "#2a78d6")
-box(29, 28, 18, 11, "(1) Local expert f_c\n(class-balanced MLP)", "#fdf0ea", "#eb6834")
-box(29, 3, 18, 11, "Federated training\nof global model g\n(GB+CR)")
-box(57, 28, 22, 11, "(3) Federated calibration\nτ_c = (1−q) quantile of s_c\nover all clients'\nnon-rare flows", "#e8f7f1", "#1baf7a", 6.2)
-box(81.5, 13, 18, 15, "(4) Fusion at any client\nif s_c(x) ≥ τ_c for some c:\npredict rare class c\nelse: global model g\n(non-rare classes)", "#f3f1fc", "#6250d6", 5.5)
-arr(21, 33.5, 29, 33.5); arr(21, 8.5, 29, 8.5)
-arr(47, 33.5, 57, 33.5); ax.text(52, 35, "(2) share f_c", ha="center", fontsize=6, color="#52514e")
-arr(21, 12, 60, 28); ax.text(66, 17.5, "(3a) each client sends a histogram\nof s_c on its own flows\n(secure aggregation)", ha="center", fontsize=6, color="#52514e")
-arr(79, 30, 87, 28); arr(47, 8.5, 87, 13)
-fig.savefig(OUT + "/fig1_overview.png", dpi=300, bbox_inches="tight"); plt.close(fig)
+# Fig 1 (overview) is drawn by make_fig1.py; the graphical abstract by make_graphical_abstract.py.
 print("done")

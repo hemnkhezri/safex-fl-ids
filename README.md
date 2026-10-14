@@ -4,11 +4,11 @@ Code, pre-registered study plans and results for the paper
 **"SAFE-X: Calibrated expert sharing for detecting client-exclusive rare attacks in federated intrusion detection"**
 (submitted to *Computer Networks*).
 
-The paper studies federated intrusion detection when a rare attack is labelled at a single client with only
+The paper studies federated intrusion detection when a rare attack is labeled at a single client with only
 5, 20 or 100 flows, on NF-UNSW-NB15-v3, NF-ToN-IoT-v3 and NF-CSE-CIC-IDS2018-v3. It reports three pre-registered
 studies:
 
-- **Study 1** measures the gap between federated and centralised training on such attacks and how seven
+- **Study 1** measures the gap between federated and centralized training on such attacks and how seven
   federated methods fail.
 - **Study 2** tests **SAFE-X**: each owner's local model is shared as an expert, and its alarm threshold is set
   on all clients' traffic (federated calibration).
@@ -21,7 +21,7 @@ studies:
 
 | | NF-UNSW-NB15-v3 | NF-ToN-IoT-v3 |
 |---|---|---|
-| Gap, centralised minus best federated (rare F1 points, k = 5 / 20 / 100) | +7.0 / +12.7 / +18.1 | +8.3 / +22.5 / +28.0 |
+| Gap, centralized minus best federated (rare F1 points, k = 5 / 20 / 100) | +7.0 / +12.7 / +18.1 | +8.3 / +22.5 / +28.0 |
 | SAFE-X minus FedOV-tab + OC (rare F1 points, pooled over k) | +3.5 [+2.5, +4.3] | +3.8 [−0.6, +7.7] (not significant) |
 | Expert false-alarm rate, owner-only vs federated calibration | 0.36% → 0.15% | 0.60% → 0.26% |
 
@@ -56,7 +56,7 @@ src/               federated training, baselines, SAFE-X, analysis
 src/dev/           development pilots (seeds 0-4; not used for any claim)
 scripts/           run scripts, job lists, data conversion, hash check
 results/           reports and per-class scores of every confirmatory run
-paper/             figure script and figures
+paper/             figure scripts (Figs. 1-4, graphical abstract) and figures
 data/              place the datasets here (see data/README.md)
 ```
 
@@ -82,7 +82,9 @@ WORKERS=4 bash scripts/run_study3.sh   # 130 units; the larger-model units take 
 WORKERS=4 bash scripts/run_study4.sh   # 120 units, about 10-20 min each; Part I reads the Study 3 runs
 
 # 3. figures from the score files
-python3 paper/make_figures.py
+python3 paper/make_figures.py          # Figs. 2-4
+python3 paper/make_fig1.py             # Fig. 1 (method overview)
+python3 paper/make_graphical_abstract.py
 ```
 
 Preprocessed arrays are cached in `~/.cache/safex` (override with `SAFEX_CACHE`). Per-run logits are written to
@@ -91,8 +93,8 @@ re-running any experiment.
 
 | Script | What it does |
 |---|---|
-| `src/conf_fl.py` | Study 1 unit: FedAvg, FedAvg-bal, FedProx-bal, FedLC, FedRS, CCVR, GB+CR, FedRep, local and centralised models |
-| `src/pilot5_expert.py` | Study 2 unit: owner experts (SAFE-X) and the GB+CR, FedProx-bal, CCVR and centralised baselines |
+| `src/conf_fl.py` | Study 1 unit: FedAvg, FedAvg-bal, FedProx-bal, FedLC, FedRS, CCVR, GB+CR, FedRep, local and centralized models |
+| `src/pilot5_expert.py` | Study 2 unit: owner experts (SAFE-X) and the GB+CR, FedProx-bal, CCVR and centralized baselines |
 | `src/pilot6_baselines.py` | Study 2 unit: PROTEAN and FedOV-tab on the same clients and test sets |
 | `src/analyze_conf.py`, `src/analyze_conf2.py` | OC / federated calibration, metrics, bootstrap CIs and the pre-registered decision rules |
 | `src/audit_toniot.py` | Leakage and duplicate audit of NF-ToN-IoT-v3 |
