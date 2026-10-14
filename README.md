@@ -14,6 +14,8 @@ studies:
   on all clients' traffic (federated calibration).
 - **Study 3** checks robustness: the full FedOV baseline, clients defined by destination hosts, membership
   inference and DP-SGD experts, label-free recalibration under drift, a larger model, and a third dataset.
+- **Study 4** checks scale and settings: 20 and 50 clients, two or three owners per rare class, and false-alarm
+  budgets q from 0.0001 to 0.01.
 
 ## Main results
 
@@ -33,8 +35,18 @@ Study 3 (seeds 300-309):
 | Expert false alarms, owner-only vs federated (host clients; CIC-IDS2018) | 6.9% → 0.18%; 5.2% → 1.3% |
 | Membership-inference AUC of non-private experts at k = 5 | UNSW 0.85, ToN 0.77; DP-SGD (ε = 1, 8) brings it to about 0.5 but rare F1 collapses |
 
+Study 4 (seeds 400-409, k = 20):
+
+| | Result |
+|---|---|
+| Gap with K = 20 / 50 clients (G1) | +14.9 to +26.4 in all six dataset-K cells, all CIs > 0 (supported) |
+| SAFE-X minus the better FedOV + OC with K = 20 / 50 (G2) | CIs > 0 in 3 of 6 cells (CIC both, UNSW K = 20); rule needed 4 (not supported) |
+| Federated vs owner-only calibration with K = 20 / 50 (G3) | fewer false alarms in all six cells (supported) |
+| SAFE-X minus the better FedOV + OC with 2 or 3 owners (H) | +3.4 to +7.6, CIs > 0 in 5 of 6 cells (descriptive) |
+| False-alarm budget q (I) | SAFE-X's sign against FedOV + OC changes with q; q = 0.001 is the only tested value where it is behind on no dataset |
+
 All pre-registered outcomes, including those not supported, are in `results/study1/CONFIRMATORY_SUMMARY.md`,
-`results/study2/CONFIRMATORY_SUMMARY_v2.md` and `results/study3/study3_report.md`.
+`results/study2/CONFIRMATORY_SUMMARY_v2.md`, `results/study3/study3_report.md` and `results/study4/study4_report.md`.
 
 ## Repository layout
 
@@ -67,6 +79,7 @@ python3 src/prep_cic.py
 WORKERS=4 bash scripts/run_study1.sh
 WORKERS=4 bash scripts/run_study2.sh
 WORKERS=4 bash scripts/run_study3.sh   # 130 units; the larger-model units take about 1.5 h each on one core
+WORKERS=4 bash scripts/run_study4.sh   # 120 units, about 10-20 min each; Part I reads the Study 3 runs
 
 # 3. figures from the score files
 python3 paper/make_figures.py
@@ -87,6 +100,8 @@ re-running any experiment.
 | `src/analyze_s3.py` | Study 3 metrics and decision rules (Parts A-F) |
 | `src/prep_cic.py`, `src/audit_cic.py` | Pool and leakage audit of NF-CSE-CIC-IDS2018-v3 |
 | `src/sealed_v3/` | The two Study 3 scripts exactly as sealed (before the Part F additions) |
+| `src/s4_unit.py`, `src/analyze_s4.py` | Study 4 unit (K = 20/50 or 2-3 owners) and its decision rules (Parts G-I) |
+| `src/sealed_v4/` | The two Study 4 scripts as sealed (identical to `src/`) |
 
 ## Notes
 

@@ -25,3 +25,13 @@ for line in lines[1:]:
         h, name = line.split()
         got = hashlib.sha256(open(os.path.join(S, os.path.basename(name)), "rb").read()).hexdigest()
         print(f"  sealed {os.path.basename(name)}: {'OK' if got == h else 'MISMATCH'}")
+plan = "study_plan_scale_v4_SEALED"
+lines = open(os.path.join(D, plan + ".sha256")).read().split("\n")
+got = hashlib.sha256(open(os.path.join(D, plan + ".md"), "rb").read()).hexdigest()
+print(f"{plan}: {'OK' if got == lines[0].split()[0] else 'MISMATCH'} ({got})")
+S = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src", "sealed_v4")
+for line in lines[1:]:
+    if line.strip():
+        h, name = line.split()
+        got = hashlib.sha256(open(os.path.join(S, os.path.basename(name)), "rb").read()).hexdigest()
+        print(f"  sealed {os.path.basename(name)}: {'OK' if got == h else 'MISMATCH'}")
