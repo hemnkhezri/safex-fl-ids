@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "SAFE-X: code, pre-registered study plans and results for calibrated expert sharing in federated intrusion detection"
+type: software
+authors:
+  - family-names: Khezri
+    given-names: Hemn
+    affiliation: "Afagh Higher Education Institute, Urmia, Iran"
+  - family-names: Trik
+    given-names: Mohammad
+    affiliation: "Islamic Azad University, Boukan Branch, Boukan, Iran"
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/hemnkhezri/safex-fl-ids"
+keywords:
+  - federated learning
+  - intrusion detection
+  - rare attacks
