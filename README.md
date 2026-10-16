@@ -56,7 +56,7 @@ src/               federated training, baselines, SAFE-X, analysis
 src/dev/           development pilots (seeds 0-4; not used for any claim)
 scripts/           run scripts, job lists, data conversion, hash check
 results/           reports and per-class scores of every confirmatory run
-paper/             figure scripts (Figs. 1-4, graphical abstract) and figures
+paper/             figure scripts (Figs. 1-6, graphical abstract) and figures
 data/              place the datasets here (see data/README.md)
 ```
 
@@ -85,6 +85,7 @@ WORKERS=4 bash scripts/run_study4.sh   # 120 units, about 10-20 min each; Part I
 python3 paper/make_figures.py          # Figs. 2-4
 python3 paper/make_fig1.py             # Fig. 1 (method overview)
 python3 paper/make_graphical_abstract.py
+python3 paper/make_figs_5_6.py         # Figs. 5-6 (false alarms, forest plot)
 ```
 
 Preprocessed arrays are cached in `~/.cache/safex` (override with `SAFEX_CACHE`). Per-run logits are written to
