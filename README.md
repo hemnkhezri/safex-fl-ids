@@ -2,10 +2,10 @@
 
 Code, pre-registered study plans and results for the paper
 **"SAFE-X: Calibrated expert sharing for detecting client-exclusive rare attacks in federated intrusion detection"**
-(submitted to *Computer Networks*).
+(under submission).
 
 The paper studies federated intrusion detection when a rare attack is labeled at a single client with only
-5, 20 or 100 flows, on NF-UNSW-NB15-v3, NF-ToN-IoT-v3 and NF-CSE-CIC-IDS2018-v3. It reports three pre-registered
+5, 20 or 100 flows, on NF-UNSW-NB15-v3, NF-ToN-IoT-v3 and NF-CSE-CIC-IDS2018-v3. It reports five pre-registered
 studies:
 
 - **Study 1** measures the gap between federated and centralized training on such attacks and how seven
@@ -16,6 +16,8 @@ studies:
   inference and DP-SGD experts, label-free recalibration under drift, a larger model, and a third dataset.
 - **Study 4** checks scale and settings: 20 and 50 clients, two or three owners per rare class, and false-alarm
   budgets q from 0.0001 to 0.01.
+- **Study 5** tests online recalibration with analyst feedback on alarms (adaptive conformal inference, ACI)
+  under temporal drift, for SAFE-X and the better calibrated FedOV.
 
 ## Main results
 
@@ -45,8 +47,17 @@ Study 4 (seeds 400-409, k = 20):
 | SAFE-X minus the better FedOV + OC with 2 or 3 owners (H) | +3.4 to +7.6, CIs > 0 in 5 of 6 cells (descriptive) |
 | False-alarm budget q (I) | SAFE-X's sign against FedOV + OC changes with q; q = 0.001 is the only tested value where it is behind on no dataset |
 
+Study 5 (seeds 500-509, K = 10, k = 20, ACI with γ = 0.005):
+
+| | NF-UNSW-NB15-v3 | NF-ToN-IoT-v3 | NF-CSE-CIC-IDS2018-v3 |
+|---|---|---|---|
+| Expert false-alarm rate with ACI (J1, target 0.1%) | 0.094% (supported) | 0.103% (supported) | 0.099% (supported) |
+| Rare F1, SAFE-X + ACI minus SAFE-X (J2, needs > −3) | −4.3 [−6.3, −2.4] (not supported) | −7.7 [−13.1, −1.5] (not supported) | −1.4 [−5.6, +2.8] (not supported) |
+| Common-attack F1 vs GB+CR (J3, needs > −1) | −0.1 [−0.2, −0.1] (supported) | +3.0 [+1.7, +4.3] (supported) | −0.0 [−0.1, −0.0] (supported) |
+| SAFE-X + ACI minus FedOV + OC + ACI (J4) | +2.6 [−0.3, +4.7] (not supported) | +0.0 [−3.7, +4.5] (not supported) | −4.7 [−7.0, −2.5] (not supported) |
+
 All pre-registered outcomes, including those not supported, are in `results/study1/CONFIRMATORY_SUMMARY.md`,
-`results/study2/CONFIRMATORY_SUMMARY_v2.md`, `results/study3/study3_report.md` and `results/study4/study4_report.md`.
+`results/study2/CONFIRMATORY_SUMMARY_v2.md`, `results/study3/study3_report.md`, `results/study4/study4_report.md` and `results/study5/study5_report.md`.
 
 ## Repository layout
 
@@ -80,6 +91,7 @@ WORKERS=4 bash scripts/run_study1.sh
 WORKERS=4 bash scripts/run_study2.sh
 WORKERS=4 bash scripts/run_study3.sh   # 130 units; the larger-model units take about 1.5 h each on one core
 WORKERS=4 bash scripts/run_study4.sh   # 120 units, about 10-20 min each; Part I reads the Study 3 runs
+WORKERS=4 bash scripts/run_study5.sh   # 30 units, about 5-10 min each
 
 # 3. figures from the score files
 python3 paper/make_figures.py          # Figs. 2-4
@@ -105,6 +117,8 @@ re-running any experiment.
 | `src/sealed_v3/` | The two Study 3 scripts exactly as sealed (before the Part F additions) |
 | `src/s4_unit.py`, `src/analyze_s4.py` | Study 4 unit (K = 20/50 or 2-3 owners) and its decision rules (Parts G-I) |
 | `src/sealed_v4/` | The two Study 4 scripts as sealed (identical to `src/`) |
+| `src/pilot8_unit.py`, `src/analyze_study5.py` | Study 5 unit (saves expert, GB+CR and FedOV scores with timestamps) and the ACI analysis with tests J1-J4 |
+| `src/dev/pilot7_*.py`, `src/dev/pilot9_loop.py` | Development pilots for extensions that did not help (negative refinement, cascade, frozen encoder, per-group calibration, federated feedback loop); reports in `results/dev/` |
 
 ## Notes
 

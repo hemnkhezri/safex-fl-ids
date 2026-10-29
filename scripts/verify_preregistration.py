@@ -35,3 +35,7 @@ for line in lines[1:]:
         h, name = line.split()
         got = hashlib.sha256(open(os.path.join(S, os.path.basename(name)), "rb").read()).hexdigest()
         print(f"  sealed {os.path.basename(name)}: {'OK' if got == h else 'MISMATCH'}")
+plan = "study_plan_aci_v5_SEALED"
+want = open(os.path.join(D, plan + ".sha256")).read().split()[0]
+got = hashlib.sha256(open(os.path.join(D, plan + ".md"), "rb").read()).hexdigest()
+print(f"{plan}: {'OK' if got == want else 'MISMATCH'} ({got})")
