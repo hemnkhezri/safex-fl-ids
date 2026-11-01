@@ -3,7 +3,7 @@
   "upload_type": "software",
   "description": "Code, sealed pre-registration plans and per-run results for the paper \"SAFE-X: Calibrated expert sharing for detecting client-exclusive rare attacks in federated intrusion detection\". The repository contains the federated training and baseline code, the SAFE-X method (shared owner experts, federated calibration and fusion), the analysis scripts for Studies 1 to 5 on NF-UNSW-NB15-v3, NF-ToN-IoT-v3 and NF-CSE-CIC-IDS2018-v3, and the scripts that draw the paper's figures.",
   "creators": [
-    {"name": "Khezri, Hemn", "affiliation": "Department of Computer Engineering, Afagh Higher Education Institute, Urmia, Iran"},
+    {"name": "Khezri, Hemn", "affiliation": "Young Researchers and Elite Club, Sardasht Branch, Islamic Azad University, Sardasht, Iran"},
     {"name": "Trik, Mohammad", "affiliation": "Department of Computer Engineering, Bou.C., Islamic Azad University, Boukan, Iran"}
   ],
   "license": "MIT",

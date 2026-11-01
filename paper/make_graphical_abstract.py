@@ -3,7 +3,7 @@ import os, sys, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, Circle
-plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans"})
+plt.rcParams.update({"font.family": "DejaVu Sans", "mathtext.fontset": "dejavusans", "pdf.fonttype": 42, "ps.fonttype": 42})
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "graphical_abstract")
 INK, MUTE, GRID = "#0b0b0b", "#52514e", "#d9d8d3"
 RARE = ("#fdf0ea", "#eb6834"); COMM = ("#eef4fc", "#2a78d6"); CAL = ("#e8f6f0", "#1baf7a"); FUS = ("#f1effc", "#6250d6")
@@ -48,14 +48,14 @@ for x in (62, 71, 80, 89):
     arrow((x, 18.8), (x, 15.1), col=CAL[1], lw=0.9)
 # ---- panel 3: results
 panel(104, 44, "Results", FUS[1])
-ax.text(126, 45, "4 pre-registered studies,\n3 NetFlow v3 datasets", ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.3)
+ax.text(126, 45, "5 pre-registered studies,\n3 NetFlow v3 datasets", ha="center", va="top", fontsize=7.6, color=INK, linespacing=1.3)
 def stat(y, big, small, col):
     ax.add_patch(FancyBboxPatch((108, y), 36, 12, boxstyle="round,pad=0,rounding_size=1", fc=col[0], ec=col[1], lw=1.0))
     ax.text(126, y + 8.8, big, ha="center", va="center", fontsize=10, weight="bold", color=col[1])
     ax.text(126, y + 3.6, small, ha="center", va="center", fontsize=6.6, color=INK, linespacing=1.15)
 stat(25, "2.1–38× fewer", "false alarms than\nowner-only calibration", CAL)
-stat(11, "+3.5 to +4.1 F1", "over calibrated FedOV\nin 3 of 4 settings", FUS)
-ax.text(126, 6.6, "except Dirichlet ToN-IoT clients", ha="center", va="center", fontsize=6.6, color=MUTE, style="italic")
+stat(11, "12 of 18 settings", "SAFE-X beats calibrated\nFedOV in rare-attack F1", FUS)
+ax.text(126, 6.6, "significantly behind in none", ha="center", va="center", fontsize=6.6, color=MUTE, style="italic")
 for x0 in (46, 97):
     arrow((x0 + 0.8, 30), (x0 + 6.2, 30), col=INK, lw=1.6)
 fig.savefig(OUT + ".pdf", bbox_inches="tight", pad_inches=0.04)

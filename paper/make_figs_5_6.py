@@ -7,13 +7,13 @@ import matplotlib.pyplot as plt
 OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures")
 plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.spines.top": False, "axes.spines.right": False,
                      "axes.edgecolor": "#52514e", "axes.labelcolor": "#0b0b0b", "xtick.color": "#52514e", "ytick.color": "#52514e",
-                     "legend.frameon": False, "svg.fonttype": "none", "pdf.fonttype": 42})
+                     "legend.frameon": False, "svg.fonttype": "none", "pdf.fonttype": 42, "ps.fonttype": 42})
 BLUE, ORANGE, GREEN, GREY, INK, MUTE = "#2a78d6", "#eb6834", "#1baf7a", "#8a8984", "#0b0b0b", "#52514e"
 DSN = {"unsw": "NF-UNSW-NB15-v3", "ton": "NF-ToN-IoT-v3", "cic": "NF-CSE-CIC-IDS2018-v3"}
 
 def save(fig, name):
     for ext in ("png", "pdf", "svg"):
-        fig.savefig(os.path.join(OUT, f"{name}.{ext}"), dpi=300 if ext == "png" else None, bbox_inches="tight", pad_inches=0.03)
+        fig.savefig(os.path.join(OUT, f"{name}.{ext}"), dpi=600 if ext == "png" else None, bbox_inches="tight", pad_inches=0.03)
     plt.close(fig)
 
 def grouped_rows(groups):
@@ -33,7 +33,7 @@ FA = [("unsw", [("Study 2, Dirichlet, K = 10", (0.36, 0.15)), ("Study 4, K = 20"
       ("cic",  [("Study 3, Dirichlet, K = 10", (5.15, 1.30)), ("Study 4, K = 20", (5.64, 1.44)), ("Study 4, K = 50", (4.51, 0.640)),
                 ("Study 4, 2 owners", (5.51, 1.38)), ("Study 4, 3 owners", (4.73, 1.54))])]
 rows, heads, H = grouped_rows(FA)
-fig, ax = plt.subplots(figsize=(7.48, 4.3))
+fig, ax = plt.subplots(figsize=(6.3, 4.0))
 for y, lab, (own, fed) in rows:
     ax.annotate("", (fed, y), (own, y), arrowprops=dict(arrowstyle="-|>", color=GREY, lw=1.0, shrinkA=4, shrinkB=4, mutation_scale=8))
     ax.plot(own, y, "o", ms=6, mfc="white", mec=ORANGE, mew=1.4, zorder=3)
@@ -61,7 +61,7 @@ FP = [("unsw", [("Study 2, Dirichlet, K = 10 *", (3.5, 2.5, 4.3)), ("Study 3, Di
       ("cic",  [("Study 3, Dirichlet, K = 10", (4.1, 2.1, 5.8)), ("Study 4, K = 20", (7.5, 1.5, 13.1)), ("Study 4, K = 50", (6.5, 2.6, 10.1)),
                 ("Study 4, 2 owners", (6.9, 1.2, 12.2)), ("Study 4, 3 owners", (6.4, 3.1, 9.8))])]
 rows, heads, H = grouped_rows(FP)
-fig, ax = plt.subplots(figsize=(7.48, 4.6))
+fig, ax = plt.subplots(figsize=(6.3, 4.3))
 ax.axvline(0, color=MUTE, lw=0.9, zorder=1)
 for y, lab, (m, lo, hi) in rows:
     sig = lo > 0 or hi < 0

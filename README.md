@@ -2,7 +2,7 @@
 
 Code, pre-registered study plans and results for the paper
 **"SAFE-X: Calibrated expert sharing for detecting client-exclusive rare attacks in federated intrusion detection"**
-(under submission).
+(submitted to *Computer Communications*, Elsevier, November 2026; under review).
 
 The paper studies federated intrusion detection when a rare attack is labeled at a single client with only
 5, 20 or 100 flows, on NF-UNSW-NB15-v3, NF-ToN-IoT-v3 and NF-CSE-CIC-IDS2018-v3. It reports five pre-registered
@@ -67,7 +67,7 @@ src/               federated training, baselines, SAFE-X, analysis
 src/dev/           development pilots (seeds 0-4; not used for any claim)
 scripts/           run scripts, job lists, data conversion, hash check
 results/           reports and per-class scores of every confirmatory run
-paper/             figure scripts (Figs. 1-6, graphical abstract) and figures
+paper/             figure scripts (Figs. 1-6, graphical abstract) and figures (vector PDF with embedded fonts, 600-dpi PNG)
 data/              place the datasets here (see data/README.md)
 ```
 
