@@ -9,7 +9,8 @@ authors:
   - family-names: Trik
     given-names: Mohammad
     affiliation: "Department of Computer Engineering, Bou.C., Islamic Azad University, Boukan, Iran"
-version: 1.1.0
+version: 1.1.1
+date-released: 2026-11-01
 license: MIT
 repository-code: "https://github.com/hemnkhezri/safex-fl-ids"
 keywords:
